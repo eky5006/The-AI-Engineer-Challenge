@@ -35,7 +35,7 @@ export const Chat = () => {
       await api.checkHealth();
       setError(null);
     } catch (err) {
-      setError('Backend API is not accessible. Please make sure the FastAPI server is running on http://localhost:8000');
+      setError('Backend API is not accessible. Please try again later.');
     }
   };
 
@@ -255,7 +255,7 @@ export const Chat = () => {
                   fontSize="lg"
                   height="50px"
                 >
-                  Send Message
+                  Write Message
                 </Button>
               </VStack>
             </form>
