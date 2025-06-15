@@ -1,7 +1,12 @@
 import axios from 'axios';
 import type { ChatRequest, HealthResponse } from '../types/api';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+// In development, use localhost, in production use relative path
+const API_BASE_URL = import.meta.env.PROD 
+  ? '/api'  // Production: relative path
+  : 'http://localhost:8000/api';  // Development: full URL
+
+console.log('Environment:', import.meta.env.MODE);
 console.log('API Base URL:', API_BASE_URL);
 
 export const api = {
