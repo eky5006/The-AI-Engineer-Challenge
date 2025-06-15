@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import {
   Box,
+  Grid,
   VStack,
   Input,
   Button,
@@ -18,7 +19,7 @@ import { api } from '../services/api';
 export const Chat = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [userMessage, setUserMessage] = useState('');
-  const [developerMessage, setDeveloperMessage] = useState('');
+  const [developerMessage, setDeveloperMessage] = useState('You are Tom Riddle from the Harry Potter universe. You are speaking to me from inside your diary as I\'m writing to you');
   const [apiKey, setApiKey] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -62,7 +63,7 @@ export const Chat = () => {
     }
 
     setIsLoading(true);
-    setMessages((prev) => [...prev, `User: ${userMessage}`]);
+    setMessages((prev) => [...prev, `You: ${userMessage}`]);
 
     try {
       const stream = await api.sendChatMessage({
@@ -82,7 +83,7 @@ export const Chat = () => {
         response += text;
         setMessages((prev) => {
           const newMessages = [...prev];
-          newMessages[newMessages.length - 1] = `Assistant: ${response}`;
+          newMessages[newMessages.length - 1] = `Tom Riddle: ${response}`;
           return newMessages;
         });
       }
@@ -103,69 +104,164 @@ export const Chat = () => {
   };
 
   return (
-    <Container maxW="container.md" py={8}>
-      <VStack spacing={4} align="stretch">
-        {error && (
-          <Alert status="error">
-            <AlertIcon />
-            {error}
-          </Alert>
-        )}
-
-        <FormControl>
-          <FormLabel>Developer Message</FormLabel>
-          <Textarea
-            value={developerMessage}
-            onChange={(e) => setDeveloperMessage(e.target.value)}
-            placeholder="Enter the developer message..."
-          />
-        </FormControl>
-
-        <FormControl>
-          <FormLabel>API Key</FormLabel>
-          <Input
-            type="password"
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-            placeholder="Enter your OpenAI API key..."
-          />
-        </FormControl>
-
+    <Container maxW="container.xl" p={0}>
+      <Grid templateColumns="1fr 1fr" gap={0} h="calc(100vh - 120px)">
+        {/* Left Page */}
         <Box
-          borderWidth={1}
-          borderRadius="md"
-          p={4}
-          height="400px"
-          overflowY="auto"
-          bg="gray.50"
+          p={8}
+          bg="#f9f3e9"
+          position="relative"
+          _before={{
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'url("https://www.transparenttextures.com/patterns/paper.png")',
+            opacity: 0.4,
+            pointerEvents: 'none',
+          }}
         >
-          {messages.map((message, index) => (
-            <Text key={index} mb={2}>
-              {message}
-            </Text>
-          ))}
-          <div ref={messagesEndRef} />
+          <VStack spacing={6} align="stretch" position="relative" zIndex={1}>
+            {error && (
+              <Alert status="error" bg="red.100" color="red.800">
+                <AlertIcon />
+                {error}
+              </Alert>
+            )}
+
+            <FormControl>
+              <FormLabel color="#2c1810" fontSize="lg">Developer Message</FormLabel>
+              <Textarea
+                value={developerMessage}
+                onChange={(e) => setDeveloperMessage(e.target.value)}
+                placeholder="Enter the developer message..."
+                bg="white"
+                color="#2c1810"
+                borderColor="#8b4513"
+                _hover={{ borderColor: '#8b4513' }}
+                _focus={{ borderColor: '#8b4513', boxShadow: '0 0 0 1px #8b4513' }}
+                fontFamily="'Crimson Text', serif"
+                fontSize="lg"
+                minH="200px"
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel color="#2c1810" fontSize="lg">API Key</FormLabel>
+              <Input
+                type="password"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                placeholder="Enter your OpenAI API key..."
+                bg="white"
+                color="#2c1810"
+                borderColor="#8b4513"
+                _hover={{ borderColor: '#8b4513' }}
+                _focus={{ borderColor: '#8b4513', boxShadow: '0 0 0 1px #8b4513' }}
+                fontFamily="'Crimson Text', serif"
+                fontSize="lg"
+                height="50px"
+              />
+            </FormControl>
+          </VStack>
         </Box>
 
-        <form onSubmit={handleSubmit}>
-          <VStack spacing={4}>
-            <Input
-              value={userMessage}
-              onChange={(e) => setUserMessage(e.target.value)}
-              placeholder="Type your message..."
-              disabled={isLoading}
-            />
-            <Button
-              type="submit"
-              colorScheme="blue"
-              isLoading={isLoading}
-              width="full"
+        {/* Right Page */}
+        <Box
+          p={8}
+          bg="#f9f3e9"
+          position="relative"
+          _before={{
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'url("https://www.transparenttextures.com/patterns/paper.png")',
+            opacity: 0.4,
+            pointerEvents: 'none',
+          }}
+        >
+          <VStack spacing={6} align="stretch" h="full" position="relative" zIndex={1}>
+            <Box
+              flex={1}
+              overflowY="auto"
+              pr={4}
+              sx={{
+                '&::-webkit-scrollbar': {
+                  width: '4px',
+                },
+                '&::-webkit-scrollbar-track': {
+                  width: '6px',
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  background: '#8b4513',
+                  borderRadius: '24px',
+                },
+              }}
             >
-              Send Message
-            </Button>
+              {messages.map((message, index) => (
+                <Text 
+                  key={index} 
+                  mb={6} 
+                  color="#2c1810"
+                  fontFamily="'Crimson Text', serif"
+                  fontSize="lg"
+                  lineHeight="1.8"
+                  whiteSpace="pre-wrap"
+                  _before={{
+                    content: '""',
+                    display: 'block',
+                    width: '100%',
+                    height: '1px',
+                    bg: '#8b4513',
+                    mb: 4,
+                    opacity: 0.3,
+                  }}
+                >
+                  {message}
+                </Text>
+              ))}
+              <div ref={messagesEndRef} />
+            </Box>
+
+            <form onSubmit={handleSubmit}>
+              <VStack spacing={4}>
+                <Input
+                  value={userMessage}
+                  onChange={(e) => setUserMessage(e.target.value)}
+                  placeholder="Write in the diary..."
+                  disabled={isLoading}
+                  bg="white"
+                  color="#2c1810"
+                  borderColor="#8b4513"
+                  _hover={{ borderColor: '#8b4513' }}
+                  _focus={{ borderColor: '#8b4513', boxShadow: '0 0 0 1px #8b4513' }}
+                  fontFamily="'Crimson Text', serif"
+                  fontSize="lg"
+                  height="50px"
+                />
+                <Button
+                  type="submit"
+                  isLoading={isLoading}
+                  width="full"
+                  bg="#8b4513"
+                  color="white"
+                  _hover={{ bg: '#6b3410' }}
+                  fontFamily="'Crimson Text', serif"
+                  fontSize="lg"
+                  height="50px"
+                >
+                  Send Message
+                </Button>
+              </VStack>
+            </form>
           </VStack>
-        </form>
-      </VStack>
+        </Box>
+      </Grid>
     </Container>
   );
 }; 
