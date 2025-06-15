@@ -108,8 +108,8 @@ export const Chat = () => {
       <Grid templateColumns="1fr 1fr" gap={0} h="calc(100vh - 120px)">
         {/* Left Page */}
         <Box
-          p={8}
-          bg="#f9f3e9"
+          p={4}
+          bg="rgba(249, 243, 233, 0.07)"
           position="relative"
           _before={{
             content: '""',
@@ -118,8 +118,8 @@ export const Chat = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'url("https://www.transparenttextures.com/patterns/paper.png")',
-            opacity: 0.4,
+            background: 'url("https://www.transparenttextures.com/patterns/old-paper.png")',
+            opacity: 0.03,
             pointerEvents: 'none',
           }}
         >
@@ -137,13 +137,13 @@ export const Chat = () => {
                 value={developerMessage}
                 onChange={(e) => setDeveloperMessage(e.target.value)}
                 placeholder="Enter the developer message..."
-                bg="white"
+                bg="rgba(255, 255, 255, 0.9)"
                 color="#2c1810"
                 borderColor="#8b4513"
                 _hover={{ borderColor: '#8b4513' }}
                 _focus={{ borderColor: '#8b4513', boxShadow: '0 0 0 1px #8b4513' }}
-                fontFamily="'Crimson Text', serif"
-                fontSize="lg"
+                fontFamily="'Caveat', cursive"
+                fontSize="2xl"
                 minH="200px"
               />
             </FormControl>
@@ -155,12 +155,12 @@ export const Chat = () => {
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
                 placeholder="Enter your OpenAI API key..."
-                bg="white"
+                bg="rgba(255, 255, 255, 0.9)"
                 color="#2c1810"
                 borderColor="#8b4513"
                 _hover={{ borderColor: '#8b4513' }}
                 _focus={{ borderColor: '#8b4513', boxShadow: '0 0 0 1px #8b4513' }}
-                fontFamily="'Crimson Text', serif"
+                fontFamily="'Caveat', cursive"
                 fontSize="lg"
                 height="50px"
               />
@@ -170,8 +170,8 @@ export const Chat = () => {
 
         {/* Right Page */}
         <Box
-          p={8}
-          bg="#f9f3e9"
+          p={4}
+          bg="rgba(249, 243, 233, 0.07)"
           position="relative"
           _before={{
             content: '""',
@@ -180,8 +180,8 @@ export const Chat = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'url("https://www.transparenttextures.com/patterns/paper.png")',
-            opacity: 0.4,
+            background: 'url("https://www.transparenttextures.com/patterns/old-paper.png")',
+            opacity: 0.03,
             pointerEvents: 'none',
           }}
         >
@@ -208,8 +208,8 @@ export const Chat = () => {
                   key={index} 
                   mb={6} 
                   color="#2c1810"
-                  fontFamily="'Crimson Text', serif"
-                  fontSize="lg"
+                  fontFamily="'Caveat', cursive"
+                  fontSize="2xl"
                   lineHeight="1.8"
                   whiteSpace="pre-wrap"
                   _before={{
@@ -235,13 +235,13 @@ export const Chat = () => {
                   onChange={(e) => setUserMessage(e.target.value)}
                   placeholder="Write in the diary..."
                   disabled={isLoading}
-                  bg="white"
+                  bg="rgba(255, 255, 255, 0.9)"
                   color="#2c1810"
                   borderColor="#8b4513"
                   _hover={{ borderColor: '#8b4513' }}
                   _focus={{ borderColor: '#8b4513', boxShadow: '0 0 0 1px #8b4513' }}
-                  fontFamily="'Crimson Text', serif"
-                  fontSize="lg"
+                  fontFamily="'Caveat', cursive"
+                  fontSize="2xl"
                   height="50px"
                 />
                 <Button
